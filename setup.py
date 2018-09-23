@@ -4,7 +4,8 @@
 # """
 # Setup for chat
 
-# Alex Harding <alex.harding@website.com>
+# Alex Harding <alex.harding@whale-net.net>
+# Connor Stabnick <connor.stabnick@whale-net.net>
 # """
 
 
