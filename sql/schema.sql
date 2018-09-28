@@ -1,6 +1,3 @@
-CREATE DATABASE mchat;
-USE mchat;
-
 CREATE TABLE Users (
 uid INTEGER AUTO_INCREMENT,
 username CHAR(24) NOT NULL,
