@@ -1,3 +1,6 @@
+CREATE DATABASE mchat;
+USE mchat;
+
 CREATE TABLE Users (
 uid INTEGER AUTO_INCREMENT,
 username CHAR(24) NOT NULL,
@@ -36,14 +39,14 @@ CREATE TABLE Images (
 );
 
 
-/* TODO make it so a blank message is possible with an image. triggers? SIGNAL! */
+/* TODO make it so a blank message is possible with an image. triggers? SIGNAL!  http://www.mysqltutorial.org/mysql-check-constraint/*/
 CREATE TABLE Messages (
     mid INTEGER AUTO_INCREMENT,
-    uid INTEGER, /* Sender */
-    gid INTEGER, /* Owned-by Group */
+    uid INTEGER NOT NULL,
+    gid INTEGER NOT NULL,
     sent_display_name VARCHAR(64),
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
-    content TEXT NOT NULL, /* 16k-65k characters */
+    content TEXT NOT NULL,
     img_hash CHAR(64),
     PRIMARY KEY (MID),
     FOREIGN KEY (img_hash) REFERENCES Images(hash)
