@@ -15,7 +15,7 @@ def get_db():
             user='mchatdev', 
             password='password',
             host='localhost',
-            chat.mchat.config['DATABASE_NAME'])
+            database=chat.mchat.config['DATABASE_NAME']
         )
     
     return flask.g.mysql_db

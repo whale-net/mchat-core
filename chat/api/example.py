@@ -7,16 +7,16 @@ import flask
 import chat
 
 
-@chat.mchat.route('/api/v1/', methods=['GET'])
+@chat.mchat.route('/api/v1/example/', methods=['GET'])
 def get_example():
     """
     Return example data with no meaning.
     """
 
-    ouput = {}
-    output['url'] = flask.request.path
-    output['git_link'] = 'https://github.com/QMasterMoo/mchat'
-    output['look_its_an_array'] = ['abc', 'def', '123', '456']
-    output['its_just_json'] = true
+    context = {}
+    context['url'] = flask.request.path
+    context['git_link'] = 'https://github.com/QMasterMoo/mchat'
+    context['look_its_an_array'] = ['abc', 'def', '123', '456']
+    context['its_just_json'] = True
 
-    return flask.jsonify(**output)
+    return flask.jsonify(**context)

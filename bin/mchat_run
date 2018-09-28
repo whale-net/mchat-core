@@ -3,7 +3,7 @@
 # Alex Harding <alex.harding@whale-net.net>
 
 # I assume user has python venv setup
-. env/bin/activate
+source env/bin/activate
 export FLASK_ENV=development
 export FLASK_APP=chat
 flask run --host 0.0.0.0 --port 8000
