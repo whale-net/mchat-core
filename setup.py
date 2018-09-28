@@ -18,5 +18,6 @@ setup (
         'requests',
         'pylint',
         'flask',
+        'mysql-connector',
     ],
 )
