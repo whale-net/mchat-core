@@ -11,6 +11,9 @@ APPLICATION_ROOT = '/'
 # Key for encrypting cookies, please regenerate before production, this is just so it works
 SECRET_KEY = b'H\t\xea\xbc\x8e-T\x87B\x95\x1a#\x1a.\xd8\x99\x04\tF\xae\x93\x03U\xf0'
 
+# Database name
+DATABASE_NAME = 'mchatdev'
+
 # path to image folder - not yet used
 # ATTACHMENT_FOLDER = os.path.join(
 #     os.path.dirname(os.path.dirname(os.path.realpath(__file__))),
