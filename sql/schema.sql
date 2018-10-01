@@ -15,7 +15,8 @@ CREATE TABLE Groups (
     owner_id INTEGER NOT NULL,
     name VARCHAR(128),
     PRIMARY KEY (gid),
-    FOREIGN KEY (creator_id) REFERENCES Users(uid)
+    FOREIGN KEY (creator_id) REFERENCES Users(uid),
+    FOREIGN KEY (owner_id) REFERENCES Users(uid)
 );
 
 CREATE TABLE Groups_Users (
@@ -44,7 +45,7 @@ CREATE TABLE Messages (
     sent_display_name VARCHAR(64),
     created TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
     content TEXT NOT NULL,
-    img_hash CHAR(64),
+    img_hash VARCHAR(64),
     PRIMARY KEY (MID),
     FOREIGN KEY (img_hash) REFERENCES Images(hash)
 );
