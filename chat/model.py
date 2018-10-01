@@ -5,9 +5,9 @@ import mysql.connector
 import flask
 import chat
 
-from util.password import *
+from chat.util.password import *
 
-def create_user(username, display_name, avatar='', password):
+def create_user(username, display_name, avatar, password):
     """
     Create a new user.
     """
@@ -18,11 +18,10 @@ def verify_username_password(username, password):
     Verify a user's password given their username.
     """
     cursor = get_db().cursor()
-    cursor.execute(
-        "SELECT password FROM Users WHERE username=?", (username,))
-    )
-    db_password_string = cursor.fetchone()['password']
-    return verify_username_password(password, db_password_string)
+    query = ('SELECT password FROM Users WHERE username=\'%s\'' % (username))
+    cursor.execute(query)
+    db_password_string = cursor.fetchone()[0]
+    return verify_password_str(password, db_password_string)
 
 
 def get_db():
@@ -48,8 +47,8 @@ def close_db(error):
     """
     if hasattr(flask.g, 'mysql_db'):
         try:
-            flask.mysql_db.commit()
+            flask.g.mysql_db.commit()
         except:
             # roll back in case of any errors when committing
-            flask.mysql_db.roll_back()
-        flask.mysql_db.close()
+            flask.g.mysql_db.roll_back()
+        flask.g.mysql_db.close()

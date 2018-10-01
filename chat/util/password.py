@@ -10,7 +10,7 @@ def create_password_str(password):
 
 def verify_password_str(password, password_db_str):
     """Verify password matches database string."""
-    spit_password_db = password_db_str.split('$')
+    split_password_db = password_db_str.split('$')
     algorithm = split_password_db[0]
     salt = split_password_db[1]
     return password_db_str == generate_password_str(algorithm, salt, password)
