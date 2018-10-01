@@ -13,5 +13,5 @@ mchat.config.from_object('chat.config')
 mchat.config.from_envvar('CHAT_SETTINGS', silent=True)
 
 # give chat app access to api model and friends
-import mchat.api # pylint: disable=wrong-import-position
-import mchat.model # pylint: disable=wrong-import-position
+import chat.api # pylint: disable=wrong-import-position
+import chat.model # pylint: disable=wrong-import-position
