@@ -23,6 +23,25 @@ def verify_username_password(username, password):
     db_password_string = cursor.fetchone()[0]
     return verify_password_str(password, db_password_string)
 
+def get_group_listing(username):
+    """
+    Retrieve group memberships.
+
+    TODO: Add pagination
+    """
+    cursor = get_db().cursor()
+    query = ('SELECT gid')
+
+def get_uid_from_username(username):
+    """
+    Get uid from username.
+    """
+    cursor = get_db().cursor()
+    query = ('SELECT uid FROM Users WHERE username=\'username\'' % (username))
+    cursor.execute(query)
+    return cursor.fetchone()[0]
+
+
 
 def get_db():
     """
