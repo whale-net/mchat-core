@@ -25,20 +25,21 @@ def verify_username_password(username, password):
 
 def get_group_listing(username):
     """
-    Retrieve group memberships.
+    Retrieve group id memberships.
 
     TODO: Add pagination
     """
     cursor = get_db().cursor()
-    query = ('SELECT gid')
+    uid = get_uid_from_username(username)
+    query = ('SELECT gid FROM Groups_Users WHERE uid=')
 
 def get_uid_from_username(username):
     """
     Get uid from username.
     """
     cursor = get_db().cursor()
-    query = ('SELECT uid FROM Users WHERE username=\'username\'' % (username))
-    cursor.execute(query)
+    query = ('SELECT uid FROM Users WHERE username=%s')
+    cursor.execute(query, username)
     return cursor.fetchone()[0]
 
 
