@@ -1,11 +1,11 @@
 """
 MChat database api.
 """
-import mysql.connector #pylint: disable=E0401
+import mysql.connector
 import flask
 import chat
 
-from chat.util.password import verify_password_str
+from chat.util.password import *
 
 def create_user(username, display_name, avatar, password):
     """
@@ -18,49 +18,10 @@ def verify_username_password(username, password):
     Verify a user's password given their username.
     """
     cursor = get_db().cursor()
-    query = 'SELECT password FROM Users WHERE username=%s'
-    cursor.execute(query, (username,))
+    query = ('SELECT password FROM Users WHERE username=\'%s\'' % (username))
+    cursor.execute(query)
     db_password_string = cursor.fetchone()[0]
-    cursor.close()
     return verify_password_str(password, db_password_string)
-
-def get_group_listing(username, num_groups=10, page_number=0):
-    """
-    Retrieve group id memberships.
-
-    Limited to 10 groups per page
-    """
-    if num_groups > 10:
-        num_groups = 10
-
-    cursor = get_db().cursor()
-    offset = page_number * num_groups
-    uid = get_uid_from_username(username)
-    query = ("""
-                SELECT g.gid, g.name
-                FROM Groups_Users gu
-                LEFT JOIN Groups g
-                on g.gid = gu.gid
-                WHERE gu.uid=%s
-                ORDER BY g.gid DESC
-                LIMIT %s, %s
-            """)
-    cursor.execute(query, (uid, offset, num_groups))
-    listing = cursor.fetchall()
-    cursor.close()
-    return listing
-
-def get_uid_from_username(username):
-    """
-    Get uid from username.
-    """
-    cursor = get_db().cursor()
-    query = 'SELECT uid FROM Users WHERE username=%s'
-    cursor.execute(query, (username,))
-    uid = cursor.fetchone()[0]
-    cursor.close()
-    return uid
-
 
 
 def get_db():
