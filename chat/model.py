@@ -21,6 +21,7 @@ def verify_username_password(username, password):
     query = ('SELECT password FROM Users WHERE username=\'%s\'' % (username))
     cursor.execute(query)
     db_password_string = cursor.fetchone()[0]
+    cursor.close()
     return verify_password_str(password, db_password_string)
 
 def get_group_listing(username):
@@ -40,7 +41,9 @@ def get_uid_from_username(username):
     cursor = get_db().cursor()
     query = ('SELECT uid FROM Users WHERE username=%s')
     cursor.execute(query, username)
-    return cursor.fetchone()[0]
+    uid = cursor.fetchone()[0]
+    cursor.close()
+    return uid
 
 
 
