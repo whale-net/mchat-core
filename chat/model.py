@@ -24,13 +24,17 @@ def verify_username_password(username, password):
     cursor.close()
     return verify_password_str(password, db_password_string)
 
-def get_group_listing(username):
+def get_group_listing(username, num_groups=10, page_number=0):
     """
     Retrieve group id memberships.
 
-    TODO: Add pagination
+    Limited to 10 groups per page
     """
+    if num_groups > 10:
+        num_groups = 10
+
     cursor = get_db().cursor()
+    offset = page_number * num_groups
     uid = get_uid_from_username(username)
     query = ("""
                 SELECT g.gid, g.name
@@ -39,8 +43,9 @@ def get_group_listing(username):
                 on g.gid = gu.gid
                 WHERE gu.uid=%s
                 ORDER BY g.gid DESC
+                LIMIT %s, %s
             """)
-    cursor.execute(query, (uid,))
+    cursor.execute(query, (uid, offset, num_groups))
     listing = cursor.fetchall()
     cursor.close()
     return listing
