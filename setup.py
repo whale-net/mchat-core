@@ -18,6 +18,8 @@ setup (
         'requests',
         'pylint',
         'flask',
+        'flask-testing',
+        'selenium',
         'mysql-connector',
     ],
 )
